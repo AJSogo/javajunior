@@ -1,6 +1,7 @@
-package lesson15;
+package lesson15.Online;
 
-import java.util.HashSet;
+import lesson15.Online.Coin;
+
 import java.util.TreeSet;
 
 public class Main2 {
