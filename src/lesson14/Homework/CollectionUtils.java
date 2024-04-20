@@ -8,18 +8,32 @@ import java.util.Set;
 public class CollectionUtils implements ICollectionUtils {
     @Override
     public Collection<Integer> union(Collection<Integer> a, Collection<Integer> b) throws NullPointerException {
-        Collection<Integer> dub = new LinkedList<>();
-        for (int i = 0; i < a.size(); i++ ) {
-            //dub.add(();
+        ArrayList<Integer> result = new ArrayList<>();
+        result.addAll(a);
+        result.addAll(b);
 
-        }
-
-        return null;
+        return result;
     }
 
     @Override
     public Collection<Integer> intersection(Collection<Integer> a, Collection<Integer> b) throws NullPointerException {
-        return null;
+
+        ArrayList<Integer> result = new ArrayList<>();
+
+        //при использовании цикла foreach вместо переменной встраивается значение массива, не индекс
+        for (Integer numFromA : a) {
+            if (b.contains(numFromA)) {
+                result.add(numFromA);
+            }
+
+        }
+        for (Integer numFromB : b) {
+            if (a.contains(numFromB)) {
+                result.add(numFromB);
+            }
+
+        }
+        return result;
     }
 
     @Override
