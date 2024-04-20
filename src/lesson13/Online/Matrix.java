@@ -113,26 +113,19 @@ public class Matrix implements IMatrix /* наследование интерф�
         Matrix help = new Matrix(this.getRows(), otherMatrix.getColumns());
 
 
-        //заполняем матрицу полностью 1
+        //Чужой КОД
+
         for (int i = 0; i < multipliedMatrix.getRows(); i++) {
             for (int j = 0; j < multipliedMatrix.getColumns(); j++) {
-                multipliedMatrix.setValueAt(i, j, 1);
+                for (int k = 0; k < this.getColumns(); k++) {
+                    multipliedMatrix.nums[i][j] += (this.getValueAt(i,k) * otherMatrix.getValueAt(k, j));
+                }
             }
         }
 
-        for (int i = 0; i < multipliedMatrix.getColumns(); i++) {
-            for (int j = 0; j < multipliedMatrix.getRows(); j++) {
-                help.setValueAt(i, j, 1);
-            }
-        }
-
-        double value;
-        /*value = this.getValueAt(i ,j) * getValueAt(j, i);
-        multipliedMatrix.setValueAt(i,j, value);
-        value = 0;*/
-
-        return null;
+        return multipliedMatrix;
     }
+
 
     @Override //умножение на число
     public IMatrix mul(double value) {
@@ -167,7 +160,7 @@ public class Matrix implements IMatrix /* наследование интерф�
 
         for (int i = 0; i < getRows(); i++) {
             for (int j = 0; j < getColumns(); j++) {
-                setValueAt(i,j, value);
+                setValueAt(i, j, value);
             }
         }
 
@@ -175,7 +168,10 @@ public class Matrix implements IMatrix /* наследование интерф�
 
     @Override //найти в интернете детерминант матрицы
     public double determinant() {
-        if(isSquareMatrix() == false){
+        double temporary[][];
+        double result = 0;
+
+        if (isSquareMatrix() == false) {
             System.out.println("Матрица должна быть квадратная, чтобы найти определитель");
             return 0;
         }
@@ -183,39 +179,55 @@ public class Matrix implements IMatrix /* наследование интерф�
         //если матрица заполнена одинаковыми числами
         double num = nums[0][0];
         boolean flag = true;
-        for(int i = 0; i< this.getRows(); i++){
-            for (int j = 0; j< this.getColumns(); j++){
-                if(getValueAt(i, j) != num){
+        for (int i = 0; i < this.getRows(); i++) {
+            for (int j = 0; j < this.getColumns(); j++) {
+                if (getValueAt(i, j) != num) {
                     flag = false;
-                };
+                }
+
             }
         }
-        if(flag == true){
+        if (flag == true) {
             System.out.println("Матрица заполнена одинаковыми числами, поэтому детерминант равен 0");
             return 0;
         }
 
         //вычисление матрицы 2 на 2
-        if(getColumns() == 2 && getRows() == 2){
+        if (getColumns() == 2 && getRows() == 2) {
             System.out.println("Детерминант матрицы 2 на 2");
-            return nums[0][0]* nums[1][1] - nums [0][1]*nums[1][0];
+            return nums[0][0] * nums[1][1] - nums[0][1] * nums[1][0];
         }
 
         //вычисление матрицы 3 на 3
-        if (getColumns() == 3 && getRows() == 3){
-            return (nums[0][0]*nums[1][1]*nums[2][2] +nums[0][1] *nums[1][2]*nums[2][0] +
-                    nums[1][0]*nums[2][1]*nums[0][2]) -
+        if (getColumns() == 3 && getRows() == 3) {
+            return (nums[0][0] * nums[1][1] * nums[2][2] + nums[0][1] * nums[1][2] * nums[2][0] +
+                    nums[1][0] * nums[2][1] * nums[0][2]) -
                     (nums[2][0] * nums[1][1] * nums[0][2] +
-                    nums[1][0] * nums[2][2] * nums[0][1]
-                    + nums[0][0] * nums[2][1] * nums[1][2] );
+                            nums[1][0] * nums[2][2] * nums[0][1]
+                            + nums[0][0] * nums[2][1] * nums[1][2]);
         }
 
-        return 0;
+
+
+        for (int i = 0; i < nums[0].length; i++) {
+            temporary = new double[nums.length - 1][nums[0].length - 1];
+
+            for (int j = 1; j < nums.length; j++) {
+                for (int k = 0; k < nums[0].length; k++) {
+                    if (k < i) {
+                        temporary[j - 1][k] = nums[j][k];
+                    } else if (k > i) {
+                        temporary[j - 1][k - 1] = nums[j][k];
+                    }
+                }
+            }
+            Matrix tempo = new Matrix(temporary);
+
+            result += nums[0][i] * Math.pow (-1, (double) i) * tempo.determinant ();
+        }
+        return (result);
         //вычисление матриц больше размером
-        }
-
-
-
+    }
 
 
     @Override
