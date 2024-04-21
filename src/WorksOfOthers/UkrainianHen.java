@@ -1,4 +1,4 @@
-package WorlsOfOthers;
+package WorksOfOthers;
 
 public class UkrainianHen extends Hen{
     public int getCountOfEggsPerMonth(){

@@ -1,9 +1,6 @@
 package lesson14.Homework;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 public class CollectionUtils implements ICollectionUtils {
     @Override
@@ -38,16 +35,68 @@ public class CollectionUtils implements ICollectionUtils {
 
     @Override
     public Set<Integer> unionWithoutDuplicate(Collection<Integer> a, Collection<Integer> b) throws NullPointerException {
-        return null;
+
+        LinkedHashSet<Integer> thirdMassive = new LinkedHashSet<>();
+
+        if (a == null || b == null){
+            System.out.println("Пустой массив, операция невозможна");
+            return null;
+        }
+
+        for (Integer numsFromA :a
+             ) {
+            thirdMassive.add(numsFromA);
+        }
+        for (Integer numsFromB :b
+        ) {
+            thirdMassive.add(numsFromB);
+        }
+
+
+        return thirdMassive;
     }
 
     @Override
     public Set<Integer> intersectionWithoutDuplicate(Collection<Integer> a, Collection<Integer> b) throws NullPointerException {
-        return null;
+
+        if (a == null || b == null){
+            System.out.println("Пустой массив, операция невозможна");
+            return null;
+        }
+
+        LinkedHashSet <Integer> linkedHashSet = new LinkedHashSet<>();
+
+        for (Integer numsFromA: a
+             ) {
+            if(b.contains(numsFromA)){
+                linkedHashSet.add(numsFromA);
+            }
+
+        }
+        return linkedHashSet;
     }
 
     @Override
     public Collection<Integer> difference(Collection<Integer> a, Collection<Integer> b) throws NullPointerException {
-        return null;
+
+        if (a == null || b == null){
+            System.out.println("Пустой массив, операция невозможна");
+            return null;
+        }
+
+        ArrayList <Integer> arrayList= new ArrayList<>();
+
+        arrayList.addAll(a);
+
+        for (Integer numsFromA: arrayList
+        ) {
+            if(b.contains(numsFromA)){
+                arrayList.remove(numsFromA);
+            }
+
+        }
+        return arrayList;
     }
+
+
 }

@@ -1,4 +1,4 @@
-package WorlsOfOthers;
+package WorksOfOthers;
 
 public abstract class HenFactory {
 
