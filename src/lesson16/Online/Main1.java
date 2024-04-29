@@ -1,4 +1,6 @@
-package lesson16;
+package lesson16.Online;
+
+import lesson16.Online.Fridge;
 
 public class Main1 {
     public static void main(String[] args) {

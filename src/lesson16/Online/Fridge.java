@@ -1,4 +1,4 @@
-package lesson16;
+package lesson16.Online;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +19,8 @@ public class Fridge {
 
 
     }
+
+
     
     public void printAllProducts (){
         for (Map.Entry<String, Integer> pr : products.entrySet()
