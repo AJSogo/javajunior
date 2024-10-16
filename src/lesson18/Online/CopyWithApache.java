@@ -1,6 +1,8 @@
 package lesson18.Online;
 
+/*
 import org.apache.commons.io.FileUtils;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +33,7 @@ public class CopyWithApache implements FileCopyUtils{
             com.google.common.io.Files.copy(original, copied);
         } catch (IOException e) {
             throw new FileCopyFailedException(e.getMessage());
-        } */
+        }
     }
 }
+*/
